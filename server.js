@@ -19,4 +19,16 @@ const questions = [
         name: "zoomLink",
         message: "What is the zoomlink for the student?"
     }
-]
+];
+
+function writeFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+}
+
+function start() {
+    inquirer.prompt(questions).then((inquirerAnswers) => {
+        writeFile('email.txt', generateEmailMarkdown({ ...inquirerAnswers }))
+    })
+}
+
+start();
